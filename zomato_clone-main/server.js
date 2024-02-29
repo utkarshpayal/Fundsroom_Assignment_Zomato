@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   }, 5000); // Adjust the interval as needed
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3020;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
