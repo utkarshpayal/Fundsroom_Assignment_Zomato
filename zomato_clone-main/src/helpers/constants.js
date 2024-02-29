@@ -1,0 +1,9 @@
+export const orderOnlinePage = "order-online";
+export const diningOutPage = "dinning-out";
+export const proAndProPlusPage = "pro-and-pro-plus";
+export const nightLifePage = "night-life";
+export const reviewPage = "reviews";
+export const bookmarksPage = "bookmarks";
+export const orderhistoryPage = "order-history";
+export const myaddressPage = "my-address";
+export const bookingsPage = "bookings";
