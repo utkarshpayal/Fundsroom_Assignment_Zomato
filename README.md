@@ -1,32 +1,98 @@
-# Cooking Live Stream
+# Fundsroom Assignment – Zomato Clone with Cooking Live Stream & Recipe Videos
 
-Cooking Live Stream is a simple web application that allows users to join a live cooking stream. Users can start streaming their video and audio to the server, enabling others to join and watch the live cooking session.
+This repository contains a frontend Zomato clone (React JS + Vite) in the [`zomato_clone-main/`](zomato_clone-main) folder, extended with two features on the restaurant page:
 
-## Features
+- **Cooking Live Stream** ("Meeting" tab) – a panel with *Join Live Stream* / *Leave Live Stream* buttons. Joining asks for camera and microphone access and shows your video in the page; leaving stops the tracks and shows "The live stream has ended."
+- **Recipe videos** ("Videos" tab) – a grid of embedded YouTube cooking/recipe videos with thumbnails, a *Load More* button, and a modal player.
 
-- Join live cooking stream
-- Stream your video and audio to the server
-- Leave the live stream when finished
+The rest of the app (home page, order online / dining / nightlife listings, restaurant overview, order, reviews, photos and menu pages, user profile, login/signup modals) is a static UI clone; all data is sample data and there is no backend API in this repository.
 
-## Usage
+## Project structure
 
-To use the Cooking Live Stream application, follow these steps:
+```
+.
+├── README.md                 # this file
+└── zomato_clone-main/        # the Vite + React application
+    ├── Project Images/       # screenshots
+    ├── public/               # banners and icons
+    ├── src/
+    │   ├── main.jsx          # routes
+    │   ├── components/RestaurantComponents/OrderBodyComponent/Components/
+    │   │   ├── MeetingComponent/   # Cooking Live Stream
+    │   │   └── VideosComponent/    # Recipe videos
+    │   └── ...
+    ├── package.json
+    └── vite.config.js
+```
 
-1. Clone the repository to your local machine.
-2. Install dependencies by running `npm install`.
-3. Start the development server by running `npm start`.
-4. Open your web browser and navigate to `http://localhost:3000`.
-5. Click on the "Join Live Stream" button to start streaming.
+## Routes
 
-**Note:** To enable live streaming functionality, you need to set up a server that supports WebRTC. This project only includes the frontend components. You can find suitable server implementations for WebRTC online or develop your own.
+Defined in `zomato_clone-main/src/main.jsx`:
 
-## Technologies Used
+| Route | Page |
+| ----- | ---- |
+| `/` | Home |
+| `/show-case?page=order-online` \| `dinning-out` \| `night-life` | Order online / Dining out / Nightlife listings |
+| `/user/:userId/:hashId` | User profile |
+| `/:city/:hotel` | Restaurant overview |
+| `/:city/:hotel/:page` | Restaurant sub-page: `order`, `reviews`, `photos`, `menu`, `meeting` (live stream), `video` (recipe videos) |
+| `*` | Error (404) page |
 
-- React
-- HTML5
-- CSS3
+## Tech stack
 
-## Contributing
+- React 18, React Router v6
+- Vite 2 (`@vitejs/plugin-react`)
+- Formik + Yup (forms and validation)
+- React Slick / slick-carousel (carousels)
+- socket.io-client (live stream component)
+- Tailwind CSS / PostCSS / Autoprefixer, plus CSS modules
 
-Contributions are welcome! Feel free to fork the repository and submit pull requests to suggest new features or improvements.
+## Getting started
 
+Prerequisites: Node.js and npm.
+
+```sh
+cd zomato_clone-main
+npm install
+npm run dev
+```
+
+Then open the local URL printed by Vite.
+
+Available scripts (in `zomato_clone-main/package.json`):
+
+| Command | Description |
+| ------- | ----------- |
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview the production build locally |
+
+There is no test script.
+
+## Configuration
+
+No environment variables are used.
+
+The live stream component (`MeetingComponent.jsx`) connects to a Socket.IO server at the hard-coded URL `http://localhost:8080` and emits a `stream` event when you join. **No streaming server is included in this repository**, so out of the box only the local camera preview works; broadcasting to other viewers requires a separate server (needs confirmation). Edit the URL in the component to point to a different server.
+
+## Screenshots
+
+Screenshots in `zomato_clone-main/Project Images/` (from the base Zomato clone):
+
+### Home Page
+
+<img src="zomato_clone-main/Project Images/Home.png" />
+
+### Order Online Page
+
+<img src="zomato_clone-main/Project Images/OrderOnlinePage.png" />
+
+### Restaurant Order Page
+
+<img src="zomato_clone-main/Project Images/HotelOrderPage.png" />
+
+### Login
+
+<img src="zomato_clone-main/Project Images/LoginPage.png" />
+
+More details about the base clone are in [`zomato_clone-main/README.md`](zomato_clone-main/README.md).
